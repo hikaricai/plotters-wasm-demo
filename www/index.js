@@ -7,6 +7,8 @@ const coord = document.getElementById("coord");
 const plotType = document.getElementById("plot-type");
 const pitch = document.getElementById("pitch");
 const yaw = document.getElementById("yaw");
+const mvx = document.getElementById("mvx");
+const mvz = document.getElementById("mvz");
 const control = document.getElementById("3d-control");
 const status = document.getElementById("status");
 
@@ -34,9 +36,13 @@ function setupUI() {
     status.innerText = "WebAssembly loaded!";
     plotType.addEventListener("change", updatePlot);
 	yaw.addEventListener("change", updatePlot);
+	mvx.addEventListener("change", updatePlot);
+	mvz.addEventListener("change", updatePlot);
 	pitch.addEventListener("change", updatePlot);
 	yaw.addEventListener("input", updatePlot);
 	pitch.addEventListener("input", updatePlot);
+	mvx.addEventListener("input", updatePlot);
+	mvz.addEventListener("input", updatePlot);
     window.addEventListener("resize", setupCanvas);
     window.addEventListener("mousemove", onMouseMove);
 }
@@ -74,8 +80,10 @@ function onMouseMove(event) {
 function updatePlot3d() {
 	let yaw_value = Number(yaw.value) / 100.0;
 	let pitch_value = Number(pitch.value) / 100.0;
-	Chart.plot3d(canvas, pitch_value, yaw_value);
-	coord.innerText = `Pitch:${pitch_value}, Yaw:${yaw_value}`
+	let mvx_value = Number(mvx.value) / 100.0;
+	let mvz_value = Number(mvz.value) / 100.0;
+	Chart.plot3d(canvas, pitch_value, yaw_value, mvx_value, mvz_value);
+	coord.innerText = `Pitch:${pitch_value}, Yaw:${yaw_value}, Mvx:${mvx_value}, Mvz:${mvz_value}`
 }
 
 /** Redraw currently selected plot. */

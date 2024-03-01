@@ -45,8 +45,8 @@ impl Chart {
         })
     }
 
-    pub fn plot3d(canvas: HtmlCanvasElement, pitch: f64, yaw: f64) -> Result<(), JsValue> {
-        plot3d::draw(canvas, pitch, yaw).map_err(|err| err.to_string())?;
+    pub fn plot3d(canvas: HtmlCanvasElement, pitch: f64, yaw: f64, mvx: f64, mvz: f64) -> Result<(), JsValue> {
+        plot3d::draw(canvas, pitch, yaw, mvx, mvz).map_err(|err| err.to_string())?;
         Ok(())
     }
 
